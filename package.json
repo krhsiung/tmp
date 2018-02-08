@@ -1,0 +1,25 @@
+{
+  "name": "meadonline",
+  "version": "1.0.0",
+  "description": "Online access for homebrewing of mead fermentation data",
+  "main": "index.js",
+  "scripts": {
+    "test": "mead"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bfnagle/MeadOnline.git"
+  },
+  "keywords": [
+    "mead"
+  ],
+  "author": "Brendan Nagle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bfnagle/MeadOnline/issues"
+  },
+  "homepage": "https://github.com/bfnagle/MeadOnline#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
