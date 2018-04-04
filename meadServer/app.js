@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var MongoClient = require('mongodb').MongoClient
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -37,5 +39,16 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+//MongoDB stuff copied blindly, to be filled in later
+MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
+  if (err) throw err
+
+  db.collection('mammals').find().toArray(function (err, result) {
+    if (err) throw err
+
+    console.log(result)
+  })
+})
 
 module.exports = app;
