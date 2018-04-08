@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var MongoClient = require('mongodb').MongoClient
+// var MongoClient = require('mongodb').MongoClient
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -41,14 +41,25 @@ app.use(function(err, req, res, next) {
 });
 
 //MongoDB stuff copied blindly, to be filled in later
-MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
-  if (err) throw err
+// MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
+//   if (err) throw err
 
-  db.collection('mammals').find().toArray(function (err, result) {
-    if (err) throw err
+//   db.collection('mammals').find().toArray(function (err, result) {
+//     if (err) throw err
 
-    console.log(result)
-  })
-})
+//     console.log(result)
+//   })
+// })
+
+// var pgp = require('pg-promise')(/*options*/)
+// var db = pgp('postgres://username:password@host:port/database')
+
+// db.one('SELECT $1 AS value', 123)
+//   .then(function (data) {
+//     console.log('DATA:', data.value)
+//   })
+//   .catch(function (error) {
+//     console.log('ERROR:', error)
+//   })
 
 module.exports = app;
