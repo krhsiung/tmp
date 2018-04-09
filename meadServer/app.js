@@ -41,12 +41,37 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-db.one('SELECT $1 AS value', 123)
-  .then(function (data) {
-    console.log('DATA:', data.value)
-  })
-  .catch(function (error) {
-    console.log('ERROR:', error)
-  });
+
+app.get('/', (req, res) => res.send('Hello World!'))
+
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
+
+var dt = new Date();  
+
+// Display the month, day, and year. getMonth() returns a 0-based number.  
+var month = dt.getMonth()+1;  
+var day = dt.getDate();  
+var year = dt.getFullYear();  
+var hour = dt.getHours();
+var minute = dt.getMinutes();
+var second = dt.getSeconds();
+var ts = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+
+
+db.none('INSERT INTO "FermentationData"."BatchData"(sample_time, batch_name, temperature) VALUES($1, $2, $3)', [ts, 'code_test', 24])
+    .then(() => {
+        console.log('success');
+        db.any('SELECT * FROM "FermentationData"."BatchData"', [true])
+		  .then(data => {
+		    console.log('DATA:', data); // print data;
+		})
+		.catch(error => {
+		    console.log('ERROR:', error); // print the error;
+		})
+    })
+    .catch(error => {
+        console.log('error: ');
+        console.log(error.message)
+    });
 
 module.exports = app;
