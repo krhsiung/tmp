@@ -42,7 +42,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.get('/', (req, res) => document.write("BEES!"))
+app.get('/', (req, res) => document.write("BEES!"));
 
 app.listen(PORT, () => console.log(`Example app listening on port ${ PORT }`))
 
