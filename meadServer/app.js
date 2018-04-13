@@ -56,12 +56,12 @@ app.listen(3000, () => console.log('Example app listening on port 3000!'))
 //   console.log("Express server listening on port " + app.get('port'));
 // });
 
-// var dt = new Date();  
+var dt = new Date();  
 
-// app.put('/data', function(req, res)
-// {
-// 	console.log('Received put request');
-// })
+app.put('/data', function(req, res)
+{
+	console.log('Received put request');
+})
 
 // Display the month, day, and year. getMonth() returns a 0-based number.  
 var month = dt.getMonth()+1;  
