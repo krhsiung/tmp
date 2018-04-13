@@ -1,1 +1,1 @@
-web: node meadServer/app.js
+web: node helloWorld.js
