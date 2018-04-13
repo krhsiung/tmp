@@ -47,7 +47,7 @@ app.use(function(err, req, res, next) {
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(5000, () => console.log('Example app listening on port 5000!'))
 
 // app.set('port', process.env.PORT || 8000);
 // app.set('host', process.env.HOST || 'polar-citadel-83608.herokuapp.com');
