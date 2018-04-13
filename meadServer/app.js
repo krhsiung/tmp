@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const PORT = process.env.PORT || 80
+const PORT = process.env.PORT || 443
 
 var pgp = require('pg-promise')(/*options*/)
 var db = pgp('postgres://user1:changeme@localhost:5432/MeadTempData')
