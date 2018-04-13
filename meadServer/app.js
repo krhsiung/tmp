@@ -3,7 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var https = require('https');
+// var https = require('https');
+const PORT = process.env.PORT || 5000
 
 // var pgp = require('pg-promise')(/*options*/)
 // var db = pgp('postgres://user1:changeme@localhost:5432/MeadTempData')
@@ -44,10 +45,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
 app.get('/', (req, res) => res.send('Hello World!'))
 
-app.listen(5000, () => console.log('Example app listening on port 5000!'))
+app.listen(PORT, () => console.log(`Example app listening on port ${ PORT }`))
 
 // app.set('port', process.env.PORT || 8000);
 // app.set('host', process.env.HOST || 'polar-citadel-83608.herokuapp.com');
