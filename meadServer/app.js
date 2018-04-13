@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var http = require('http');
+var https = require('https');
 
 var pgp = require('pg-promise')(/*options*/)
 var db = pgp('postgres://user1:changeme@localhost:5432/MeadTempData')
@@ -47,14 +47,14 @@ app.use(function(err, req, res, next) {
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+// app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
-// app.set('port', process.env.PORT || 8000);
-// app.set('host', process.env.HOST || '192.168.0.202');
+app.set('port', process.env.PORT || 8000);
+app.set('host', process.env.HOST || 'polar-citadel-83608.herokuapp.com');
 
-// http.createServer(app).listen(app.get('port'), app.get('host'), function(){
-//   console.log("Express server listening on port " + app.get('port'));
-// });
+https.createServer(app).listen(app.get('port'), app.get('host'), function(){
+  console.log("Express server listening on port " + app.get('port'));
+});
 
 var dt = new Date();  
 
