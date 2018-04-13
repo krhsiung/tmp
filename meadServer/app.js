@@ -60,6 +60,7 @@ app.put('/data', function(req, res)
 
 	console.log('Received put request at: ' + ts);
 	document.write('Received put request at: ' + ts);
+	alert('Received put request at: ' + ts);
 })
 
 
