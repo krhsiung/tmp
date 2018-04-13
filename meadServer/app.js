@@ -47,21 +47,21 @@ app.use(function(err, req, res, next) {
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
-// app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
-app.set('port', process.env.PORT || 8000);
-app.set('host', process.env.HOST || 'polar-citadel-83608.herokuapp.com');
+// app.set('port', process.env.PORT || 8000);
+// app.set('host', process.env.HOST || 'polar-citadel-83608.herokuapp.com');
 
-https.createServer(app).listen(app.get('port'), app.get('host'), function(){
-  console.log("Express server listening on port " + app.get('port'));
-});
+// https.createServer(app).listen(app.get('port'), app.get('host'), function(){
+//   console.log("Express server listening on port " + app.get('port'));
+// });
 
-var dt = new Date();  
+// var dt = new Date();  
 
-app.put('/data', function(req, res)
-{
-	console.log('Received put request');
-})
+// app.put('/data', function(req, res)
+// {
+// 	console.log('Received put request');
+// })
 
 // Display the month, day, and year. getMonth() returns a 0-based number.  
 var month = dt.getMonth()+1;  
