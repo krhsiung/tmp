@@ -47,7 +47,7 @@ app.use(function(err, req, res, next) {
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => res.render('pages/index'))
 
 app.listen(PORT, () => console.log(`Example app listening on port ${ PORT }`))
 
