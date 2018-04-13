@@ -59,6 +59,7 @@ app.put('/data', function(req, res)
 	var ts = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
 	console.log('Received put request at: ' + ts);
+	document.write('Received put request at: ' + ts);
 })
 
 
