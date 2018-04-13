@@ -46,21 +46,20 @@ app.get('/', (req, res) => res.send('Hello World!'))
 
 app.listen(PORT, () => console.log(`Example app listening on port ${ PORT }`))
 
-// var dt = new Date();  
 
-// app.put('/data', function(req, res)
-// {
-// 	console.log('Received put request');
-// })
+app.put('/data', function(req, res)
+{
+	var dt = new Date();
+	var month = dt.getMonth()+1;  
+	var day = dt.getDate();  
+	var year = dt.getFullYear();  
+	var hour = dt.getHours();
+	var minute = dt.getMinutes();
+	var second = dt.getSeconds();
+	var ts = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
-// // Display the month, day, and year. getMonth() returns a 0-based number.  
-// var month = dt.getMonth()+1;  
-// var day = dt.getDate();  
-// var year = dt.getFullYear();  
-// var hour = dt.getHours();
-// var minute = dt.getMinutes();
-// var second = dt.getSeconds();
-// var ts = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+	console.log('Received put request at: ' + ts);
+})
 
 
 // db.none('INSERT INTO "FermentationData"."BatchData"(sample_time, batch_name, temperature) VALUES($1, $2, $3)', [ts, 'code_test', 24])
