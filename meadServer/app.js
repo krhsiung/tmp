@@ -3,15 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-// var https = require('https');
 const PORT = process.env.PORT || 5000
 
-// var pgp = require('pg-promise')(/*options*/)
-// var db = pgp('postgres://user1:changeme@localhost:5432/MeadTempData')
+var pgp = require('pg-promise')(/*options*/)
+var db = pgp('postgres://user1:changeme@localhost:5432/MeadTempData')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-// var dataRouter = require('./routes/data');
 
 var app = express();
 
@@ -27,7 +25,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-// app.use('/data', dataRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -45,18 +42,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// app.set('views', path.join(__dirname, 'views'))
-// app.set('view engine', 'ejs')
 app.get('/', (req, res) => res.send('Hello World!'))
 
 app.listen(PORT, () => console.log(`Example app listening on port ${ PORT }`))
-
-// app.set('port', process.env.PORT || 5000);
-// app.set('host', process.env.HOST || 'polar-citadel-83608.herokuapp.com');
-
-// https.createServer(app).listen(app.get('port'), app.get('host'), function(){
-//   console.log("Express server listening on port " + app.get('port'));
-// });
 
 // var dt = new Date();  
 
