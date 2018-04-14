@@ -53,6 +53,7 @@ const pool = new Pool({
 });
 
 app.get('/', async (req, res) => {
+	console.log("Getting response");
   try {
     const client = await pool.connect()
     const result = await client.query('SELECT * FROM "BatchData"');
