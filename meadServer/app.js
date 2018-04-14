@@ -30,11 +30,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
-app.get('/db', function(req, res)
+app.get('/db', async (req, res) =>
 {
-	client.connect();
-
-	const result = client.query('SELECT * from "BatchData";');
+	const result = await client.query('SELECT * from "BatchData";');
 	console.log(result);
 	// console.log(result.row);
 	res.send(result);
@@ -77,6 +75,8 @@ app.use(function(err, req, res, next) {
 
 
 app.listen(PORT, () => console.log(`App listening on port ${ PORT }`))
+
+client.connect();
 	
 // client.query('SELECT * FROM "BatchData";', (err, res) => {
 //   if (err) throw err;
