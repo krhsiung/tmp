@@ -5,8 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const PORT = process.env.PORT || 5000
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// var indexRouter = require('./routes/index');
+// var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -20,8 +20,24 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
+
+app.get('/', (req, res) => res.send('Hello World!'));
+
+app.get('/db', async (req, res) => {
+	console.log("Getting response");
+  try {
+    // const result = await client.query('SELECT * FROM "BatchData"');
+    // console.log("Result from query: " + result);
+    // res.render('pages/db', result);
+    // client.release();
+  } catch (err) {
+  	// console.log('Error');
+    // console.error(err);
+    // res.send("Error " + err);
+  }
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,7 +55,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// app.get('/', (req, res) => document.write("BEES!"));
 
 app.listen(PORT, () => console.log(`App listening on port ${ PORT }`))
 
@@ -59,23 +74,6 @@ client.query('SELECT * FROM "BatchData";', (err, res) => {
   }
   client.end();
 });
-
-
-app.get('/', (req, res) => res.send('Hello World!'));
-
-// app.get('/db', async (req, res) => {
-// 	console.log("Getting response");
-//   try {
-//     // const result = await client.query('SELECT * FROM "BatchData"');
-//     // console.log("Result from query: " + result);
-//     // res.render('pages/db', result);
-//     // client.release();
-//   } catch (err) {
-//   	// console.log('Error');
-//     // console.error(err);
-//     // res.send("Error " + err);
-//   }
-// });
 
 
 // app.put('/data', function(req, res)
