@@ -51,6 +51,7 @@ app.put('/db', async function(req, res)
 {
 	try
 	{
+		console.log(req);
 		res.send(req);
 		// var batchName = req;
 		// var temp = req;
