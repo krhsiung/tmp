@@ -52,7 +52,7 @@ const pool = new Pool({
   ssl: true
 });
 
-app.get('/db', async (req, res) => {
+app.get('/', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = await client.query('SELECT * FROM "BatchData"');
