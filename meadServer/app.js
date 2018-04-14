@@ -28,14 +28,14 @@ app.get('/', (req, res) => res.send('Hello World!'));
 app.get('/db', async (req, res) => {
 	console.log("Getting response");
   try {
-    // const result = await client.query('SELECT * FROM "BatchData"');
-    // console.log("Result from query: " + result);
-    // res.render('pages/db', result);
-    // client.release();
+    const result = await client.query('SELECT * FROM "BatchData"');
+    res.send("Result from query: " + result);
+    res.render('pages/db', result);
+    client.release();
   } catch (err) {
-  	// console.log('Error');
-    // console.error(err);
-    // res.send("Error " + err);
+  	console.log('Error');
+    console.error(err);
+    res.send("Error " + err);
   }
 });
 
