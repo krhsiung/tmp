@@ -30,7 +30,7 @@ app.get('/db', async (req, res) => {
   try {
     const result = await client.query('SELECT * FROM "BatchData"');
     res.send("Result from query: " + result);
-    res.render('pages/db', result);
+    // res.render('pages/db', result);
     client.release();
   } catch (err) {
   	console.log('Error');
