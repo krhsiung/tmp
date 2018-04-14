@@ -52,7 +52,7 @@ const pool = new Pool({
   ssl: true
 });
 
-app.get('/', async (req, res) => {
+app.get('/db', async (req, res) => {
 	console.log("Getting response");
   try {
     const client = await pool.connect()
