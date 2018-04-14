@@ -31,27 +31,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => res.send('Hello World!'));
 
 app.get('/db', async (req, res) => {
-	client.connect();
-	
-	client.query('SELECT * FROM "BatchData";', (err, res) => {
-	  if (err) throw err;
-	  for (let row of res.rows) {
-	    res.send(JSON.stringify(row));
-	  }
-	});
-	client.end();
-	
-	// console.log("Getting response");
- //  try {
- //    const result = await client.query('SELECT * FROM "BatchData"');
- //    res.send("Result from query: " + result);
- //    // res.render('pages/db', result);
- //    client.release();
- //  } catch (err) {
- //  	console.log('Error');
- //    console.error(err);
- //    res.send("Error " + err);
- //  }
+	res.send("Getting response");
+  try {
+    const result = await client.query('SELECT * FROM "BatchData"');
+    res.send("Result from query: " + result);
+    // res.render('pages/db', result);
+    client.release();
+  } catch (err) {
+  	console.log('Error');
+    console.error(err);
+    res.send("Error " + err);
+  }
 });
 
 // catch 404 and forward to error handler
