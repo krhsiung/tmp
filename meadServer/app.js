@@ -32,12 +32,20 @@ app.get('/', (req, res) => res.send('Hello World!'));
 
 app.get('/db', async function(req, res)
 {
-	const result = await client.query('SELECT * from "BatchData";');
-	for (let row of result.rows)
+	try
 	{
-		res.send(JSON.stringify(row));
+		const result = await client.query('SELECT * from "BatchData";');
+		for (let row of result.rows)
+		{
+			res.send(JSON.stringify(row));
+		}
+		client.end();
 	}
-	client.end();
+	catch (err)
+	{
+		console.log('Error');
+		console.error(err);
+	}
 });
 
 // app.get('/db', async (req, res) => {
