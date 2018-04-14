@@ -30,7 +30,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
-app.get('/db', (req, res) => res.send('Goodbye World!'));
+app.get('/db', function(req, res)
+	{
+		client.connect();
+
+		client.query('SELECT * from "BatchData";', function(err, response)
+		{
+			if (err) throw err;
+			for (let row of result.rows)
+			{
+				response.send(JSON.stringify(row));
+			}
+			cleint.end();
+		});
+	});
 
 // app.get('/db', async (req, res) => {
 // 	console.log("Getting response");
