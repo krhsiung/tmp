@@ -32,17 +32,14 @@ app.get('/', (req, res) => res.send('Hello World!'));
 
 app.get('/db', function(req, res)
 	{
-		client.connect();
+		// client.connect();
 
-		client.query('SELECT * from "BatchData";', function(err, res)
+		const result = client.query('SELECT * from "BatchData";');
+		for (let row of res.rows)
 		{
-			if (err) throw err;
-			for (let row of res.rows)
-			{
-				res.send(JSON.stringify(row));
-			}
-			client.end();
-		});
+			res.send(JSON.stringify(row));
+		}
+		client.end();
 	});
 
 // app.get('/db', async (req, res) => {
@@ -78,7 +75,7 @@ app.use(function(err, req, res, next) {
 
 app.listen(PORT, () => console.log(`App listening on port ${ PORT }`))
 
-// client.connect();
+client.connect();
 	
 // client.query('SELECT * FROM "BatchData";', (err, res) => {
 //   if (err) throw err;
