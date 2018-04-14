@@ -56,7 +56,7 @@ try {
 	const client = pool.connect()
 	const result = client.query('SELECT * FROM "BatchData"');
 	console.log("Result from query: " + result);
-	res.render('pages/db', result);
+	// res.render('pages/db', result);
 	client.release();
 } catch (err) {
 	console.log('Error');
