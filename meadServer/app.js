@@ -46,11 +46,7 @@ app.use(function(err, req, res, next) {
 
 app.listen(PORT, () => console.log(`Example app listening on port ${ PORT }`))
 
-const { Pool, Client } = require('pg');
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true
-});
+const { Client } = require('pg');
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
@@ -58,8 +54,6 @@ const client = new Client({
 });
 
 client.connect();
-
-console.log("New take");
 
 client.query('SELECT * FROM "BatchData";', (err, res) => {
   if (err) throw err;
@@ -69,22 +63,10 @@ client.query('SELECT * FROM "BatchData";', (err, res) => {
   client.end();
 });
 
-// try {
-// 	const client = pool.connect()
-// 	const result = client.query('SELECT * FROM "BatchData"');
-// 	console.log("Result from query: " + result);
-// 	// res.render('pages/db', result);
-// 	client.release();
-// } catch (err) {
-// 	console.log('Error');
-// 	console.error(err);
-// 	// res.send("Error " + err);
-// }
 
 app.get('/db', async (req, res) => {
 	console.log("Getting response");
   try {
-    const client = await pool.connect()
     const result = await client.query('SELECT * FROM "BatchData"');
     console.log("Result from query: " + result);
     res.render('pages/db', result);
