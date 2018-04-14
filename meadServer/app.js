@@ -51,7 +51,7 @@ app.put('/db', async function(req, res)
 {
 	try
 	{
-		var json = JSON.parse(req);
+		var json = JSON.parse(req.body);
 		var batchName = json.batch;
 		var temp = json.temp;
 		console.log(batchName);
