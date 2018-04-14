@@ -51,7 +51,8 @@ app.put('/db', function(req, res)
 {
 	console.log('Servicing put request');
 	console.log('request head: ' + req.head);
-	console.log('request body: ' + req.body);
+	console.log('request body: ');
+	console.log(req.body);
 	res.send(req.body);
 	try
 	{
