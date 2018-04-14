@@ -52,36 +52,38 @@ const pool = new Pool({
   ssl: true
 });
 
-pool.connect();
+pool.query('SELECT NOW()', (err, res) => {
+  console.log(err, res)
+  pool.end()
+})
 
-try
-{
-	pool.query('SELECT * FROM "BatchData";', (err, res) => {
-	  if (err) throw err;
-	  for (let row of res.rows) {
-	    console.log(JSON.stringify(row));
-	  }
-	  client.end();
-	});
-}
-catch (err)
-{
-	console.error(err);
-	res.send("Error " + err);
-}
+// try {
+// 	const client = await pool.connect()
+// 	const result = await client.query('SELECT * FROM "BatchData"');
+// 	console.log("Result from query: " + result);
+// 	res.render('pages/db', result);
+// 	client.release();
+// } catch (err) {
+// 	console.log('Error');
+// 	console.error(err);
+// 	res.send("Error " + err);
+// }
 
 app.get('/db', async (req, res) => {
   try {
     const client = await pool.connect()
-    const result = await client.query('SELECT * FROM test_table');
+    const result = await client.query('SELECT * FROM "BatchData"');
+    console.log("Result from query: " + result);
     res.render('pages/db', result);
     client.release();
   } catch (err) {
+  	console.log('Error');
     console.error(err);
     res.send("Error " + err);
   }
 });
 
+console.log('After the get');
 
 // app.put('/data', function(req, res)
 // {
