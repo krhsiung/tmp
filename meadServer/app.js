@@ -47,7 +47,7 @@ app.get('/db', async function(req, res)
 	}
 });
 
-app.put('/db', async function(req, res)
+app.put('/db', function(req, res)
 {
 	try
 	{
