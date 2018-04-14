@@ -32,13 +32,13 @@ app.get('/', (req, res) => res.send('Hello World!'));
 
 app.get('/db', async function(req, res)
 {
-	res.send('Querying database');
 	try
 	{
 		const result = await client.query('SELECT * from "BatchData";');
 		for (let row of result.rows)
 		{
 			res.send(JSON.stringify(row));
+			break;
 		}
 		client.end();
 	}
