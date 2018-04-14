@@ -52,23 +52,6 @@ const pool = new Pool({
   ssl: true
 });
 
-pool.query('SELECT NOW()', (err, res) => {
-  console.log(err, res)
-  pool.end()
-})
-
-// try {
-// 	const client = await pool.connect()
-// 	const result = await client.query('SELECT * FROM "BatchData"');
-// 	console.log("Result from query: " + result);
-// 	res.render('pages/db', result);
-// 	client.release();
-// } catch (err) {
-// 	console.log('Error');
-// 	console.error(err);
-// 	res.send("Error " + err);
-// }
-
 app.get('/db', async (req, res) => {
   try {
     const client = await pool.connect()
