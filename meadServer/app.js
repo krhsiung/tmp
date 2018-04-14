@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
-app.get('/db', async (req, res) =>
+app.get('/db', async function(req, res)
 {
 	const result = await client.query('SELECT * from "BatchData";');
 	console.log(result);
