@@ -53,8 +53,8 @@ const pool = new Pool({
 });
 
 try {
-	const client = await pool.connect()
-	const result = await client.query('SELECT * FROM "BatchData"');
+	const client = pool.connect()
+	const result = client.query('SELECT * FROM "BatchData"');
 	console.log("Result from query: " + result);
 	res.render('pages/db', result);
 	client.release();
