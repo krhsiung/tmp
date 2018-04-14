@@ -78,7 +78,6 @@ app.get('/db', async (req, res) => {
   }
 });
 
-console.log('After the get');
 
 // app.put('/data', function(req, res)
 // {
