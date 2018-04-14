@@ -5,9 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const PORT = process.env.PORT || 5000
 
-// var pgp = require('pg-promise')(/*options*/)
-// var db = pgp('postgres://user1:changeme@localhost:5433/MeadTempData10')
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -44,7 +41,7 @@ app.use(function(err, req, res, next) {
 
 // app.get('/', (req, res) => document.write("BEES!"));
 
-app.listen(PORT, () => console.log(`Example app listening on port ${ PORT }`))
+app.listen(PORT, () => console.log(`App listening on port ${ PORT }`))
 
 const { Client } = require('pg');
 
@@ -54,7 +51,7 @@ const client = new Client({
 });
 
 client.connect();
-
+	
 client.query('SELECT * FROM "BatchData";', (err, res) => {
   if (err) throw err;
   for (let row of res.rows) {
@@ -64,19 +61,21 @@ client.query('SELECT * FROM "BatchData";', (err, res) => {
 });
 
 
-app.get('/db', async (req, res) => {
-	console.log("Getting response");
-  try {
-    const result = await client.query('SELECT * FROM "BatchData"');
-    console.log("Result from query: " + result);
-    res.render('pages/db', result);
-    client.release();
-  } catch (err) {
-  	console.log('Error');
-    console.error(err);
-    res.send("Error " + err);
-  }
-});
+app.get('/', (req, res) => res.send('Hello World!'));
+
+// app.get('/db', async (req, res) => {
+// 	console.log("Getting response");
+//   try {
+//     // const result = await client.query('SELECT * FROM "BatchData"');
+//     // console.log("Result from query: " + result);
+//     // res.render('pages/db', result);
+//     // client.release();
+//   } catch (err) {
+//   	// console.log('Error');
+//     // console.error(err);
+//     // res.send("Error " + err);
+//   }
+// });
 
 
 // app.put('/data', function(req, res)
@@ -94,22 +93,5 @@ app.get('/db', async (req, res) => {
 // 	document.write('Received put request at: ' + ts);
 // 	alert('Received put request at: ' + ts);
 // })
-
-
-// db.none('INSERT INTO BatchData"(sample_time, batch_name, temperature) VALUES($1, $2, $3)', [ts, 'code_test', 24])
-//     .then(() => {
-//         console.log('success');
-//         db.any('SELECT * FROM "BatchData"', [true])
-// 		  .then(data => {
-// 		    console.log('DATA:', data); // print data;
-// 		})
-// 		.catch(error => {
-// 		    console.log('ERROR:', error); // print the error;
-// 		})
-//     })
-//     .catch(error => {
-//         console.log('error: ');
-//         console.log(error.message)
-//     });
 
 module.exports = app;
