@@ -3,10 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const PORT = process.env.PORT || 443
+const PORT = process.env.PORT || 5000
 
-var pgp = require('pg-promise')(/*options*/)
-var db = pgp('postgres://user1:changeme@localhost:5432/MeadTempData')
+// var pgp = require('pg-promise')(/*options*/)
+// var db = pgp('postgres://user1:changeme@localhost:5433/MeadTempData10')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -42,32 +42,68 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.get('/', (req, res) => document.write("BEES!"));
+// app.get('/', (req, res) => document.write("BEES!"));
 
 app.listen(PORT, () => console.log(`Example app listening on port ${ PORT }`))
 
+const { Pool } = require('pg');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+});
 
-app.put('/data', function(req, res)
+pool.connect();
+
+try
 {
-	var dt = new Date();
-	var month = dt.getMonth()+1;  
-	var day = dt.getDate();  
-	var year = dt.getFullYear();  
-	var hour = dt.getHours();
-	var minute = dt.getMinutes();
-	var second = dt.getSeconds();
-	var ts = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+	pool.query('SELECT * FROM "BatchData";', (err, res) => {
+	  if (err) throw err;
+	  for (let row of res.rows) {
+	    console.log(JSON.stringify(row));
+	  }
+	  client.end();
+	});
+}
+catch (err)
+{
+	console.error(err);
+	res.send("Error " + err);
+}
 
-	console.log('Received put request at: ' + ts);
-	document.write('Received put request at: ' + ts);
-	alert('Received put request at: ' + ts);
-})
+app.get('/db', async (req, res) => {
+  try {
+    const client = await pool.connect()
+    const result = await client.query('SELECT * FROM test_table');
+    res.render('pages/db', result);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
 
 
-// db.none('INSERT INTO "FermentationData"."BatchData"(sample_time, batch_name, temperature) VALUES($1, $2, $3)', [ts, 'code_test', 24])
+// app.put('/data', function(req, res)
+// {
+// 	var dt = new Date();
+// 	var month = dt.getMonth()+1;  
+// 	var day = dt.getDate();  
+// 	var year = dt.getFullYear();  
+// 	var hour = dt.getHours();
+// 	var minute = dt.getMinutes();
+// 	var second = dt.getSeconds();
+// 	var ts = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+
+// 	console.log('Received put request at: ' + ts);
+// 	document.write('Received put request at: ' + ts);
+// 	alert('Received put request at: ' + ts);
+// })
+
+
+// db.none('INSERT INTO BatchData"(sample_time, batch_name, temperature) VALUES($1, $2, $3)', [ts, 'code_test', 24])
 //     .then(() => {
 //         console.log('success');
-//         db.any('SELECT * FROM "FermentationData"."BatchData"', [true])
+//         db.any('SELECT * FROM "BatchData"', [true])
 // 		  .then(data => {
 // 		    console.log('DATA:', data); // print data;
 // 		})
