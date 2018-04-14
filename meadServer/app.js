@@ -52,6 +52,7 @@ const pool = new Pool({
   ssl: true
 });
 
+console.log("New take");
 try {
 	const client = pool.connect()
 	const result = client.query('SELECT * FROM "BatchData"');
