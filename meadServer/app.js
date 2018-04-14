@@ -4,6 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const PORT = process.env.PORT || 5000
+const { Client } = require('pg');
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
 
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -26,17 +31,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => res.send('Hello World!'));
 
 app.get('/db', async (req, res) => {
-	console.log("Getting response");
-  try {
-    const result = await client.query('SELECT * FROM "BatchData"');
-    res.send("Result from query: " + result);
-    // res.render('pages/db', result);
-    client.release();
-  } catch (err) {
-  	console.log('Error');
-    console.error(err);
-    res.send("Error " + err);
-  }
+	client.connect();
+	
+	client.query('SELECT * FROM "BatchData";', (err, res) => {
+	  if (err) throw err;
+	  for (let row of res.rows) {
+	    console.log(JSON.stringify(row));
+	  }
+	  client.end();
+	});
+	
+	// console.log("Getting response");
+ //  try {
+ //    const result = await client.query('SELECT * FROM "BatchData"');
+ //    res.send("Result from query: " + result);
+ //    // res.render('pages/db', result);
+ //    client.release();
+ //  } catch (err) {
+ //  	console.log('Error');
+ //    console.error(err);
+ //    res.send("Error " + err);
+ //  }
 });
 
 // catch 404 and forward to error handler
@@ -57,23 +72,6 @@ app.use(function(err, req, res, next) {
 
 
 app.listen(PORT, () => console.log(`App listening on port ${ PORT }`))
-
-const { Client } = require('pg');
-
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
-});
-
-client.connect();
-	
-client.query('SELECT * FROM "BatchData";', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
-  client.end();
-});
 
 
 // app.put('/data', function(req, res)
