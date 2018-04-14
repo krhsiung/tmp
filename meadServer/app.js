@@ -55,7 +55,7 @@ app.put('/db', function(req, res)
 	console.log('request body: ');
 	console.log(req.body);
 	var json = JSON.parse(req.body);
-	res.send(json.batch);
+	res.send(req.body);
 	try
 	{
 		// var json = JSON.parse(req.body);
