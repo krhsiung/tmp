@@ -36,7 +36,7 @@ app.get('/db', async (req, res) => {
 	client.query('SELECT * FROM "BatchData";', (err, res) => {
 	  if (err) throw err;
 	  for (let row of res.rows) {
-	    console.log(JSON.stringify(row));
+	    res.send(JSON.stringify(row));
 	  }
 	});
 	client.end();
