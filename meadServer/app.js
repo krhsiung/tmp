@@ -32,6 +32,7 @@ app.get('/', (req, res) => res.send('Hello World!'));
 
 app.get('/db', async function(req, res)
 {
+	res.send('Querying database');
 	try
 	{
 		const result = await client.query('SELECT * from "BatchData";');
@@ -47,6 +48,8 @@ app.get('/db', async function(req, res)
 		console.error(err);
 	}
 });
+
+app.put('/db')
 
 // app.get('/db', async (req, res) => {
 // 	console.log("Getting response");
