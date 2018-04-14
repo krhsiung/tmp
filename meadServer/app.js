@@ -50,7 +50,9 @@ app.get('/db', async function(req, res)
 app.put('/db', function(req, res)
 {
 	console.log('Servicing put request');
-	console.log(req.head);
+	console.log('request head: ' + req.head);
+	console.log('request body: ' + req.body);
+	res.send(req.body);
 	try
 	{
 		// var json = JSON.parse(req.body);
