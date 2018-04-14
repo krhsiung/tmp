@@ -34,14 +34,14 @@ app.get('/db', function(req, res)
 	{
 		client.connect();
 
-		client.query('SELECT * from "BatchData";', function(err, response)
+		client.query('SELECT * from "BatchData";', function(err, res)
 		{
 			if (err) throw err;
-			for (let row of response.rows)
+			for (let row of res.rows)
 			{
-				response.send(JSON.stringify(row));
+				res.send(JSON.stringify(row));
 			}
-			cleint.end();
+			client.end();
 		});
 	});
 
