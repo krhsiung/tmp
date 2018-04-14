@@ -49,13 +49,14 @@ app.get('/db', async function(req, res)
 
 app.put('/db', function(req, res)
 {
+	console.log(req.body);
 	try
 	{
-		var json = JSON.parse(req.body);
-		var batchName = json.batch;
-		var temp = json.temp;
-		console.log(batchName);
-		res.send(batchName);
+		// var json = JSON.parse(req.body);
+		// var batchName = json.batch;
+		// var temp = json.temp;
+		// console.log(batchName);
+		// res.send(batchName);
 		// var batchName = req;
 		// var temp = req;
 
