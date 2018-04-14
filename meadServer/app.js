@@ -46,24 +46,40 @@ app.use(function(err, req, res, next) {
 
 app.listen(PORT, () => console.log(`Example app listening on port ${ PORT }`))
 
-const { Pool } = require('pg');
+const { Pool, Client } = require('pg');
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: true
 });
 
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+
+client.connect();
+
 console.log("New take");
-try {
-	const client = pool.connect()
-	const result = client.query('SELECT * FROM "BatchData"');
-	console.log("Result from query: " + result);
-	// res.render('pages/db', result);
-	client.release();
-} catch (err) {
-	console.log('Error');
-	console.error(err);
-	// res.send("Error " + err);
-}
+
+client.query('SELECT * FROM "BatchData";', (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    console.log(JSON.stringify(row));
+  }
+  client.end();
+});
+
+// try {
+// 	const client = pool.connect()
+// 	const result = client.query('SELECT * FROM "BatchData"');
+// 	console.log("Result from query: " + result);
+// 	// res.render('pages/db', result);
+// 	client.release();
+// } catch (err) {
+// 	console.log('Error');
+// 	console.error(err);
+// 	// res.send("Error " + err);
+// }
 
 app.get('/db', async (req, res) => {
 	console.log("Getting response");
