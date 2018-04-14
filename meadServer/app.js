@@ -51,8 +51,11 @@ app.put('/db', async function(req, res)
 {
 	try
 	{
-		console.log(req);
-		res.send(req);
+		var json = JSON.parse(req);
+		var batchName = json.batch;
+		var temp = json.temp;
+		console.log(batchName);
+		res.send(batchName);
 		// var batchName = req;
 		// var temp = req;
 
