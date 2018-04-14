@@ -32,17 +32,13 @@ app.get('/', (req, res) => res.send('Hello World!'));
 
 app.get('/db', async function(req, res)
 {
-	// client.connect();
-
 	try
 	{
 		const result = await client.query('SELECT * from "BatchData";');
 		for (let row of result.rows)
 		{
 			res.send(JSON.stringify(row));
-			break;
 		}
-		// client.end();
 	}
 	catch (err)
 	{
@@ -51,7 +47,31 @@ app.get('/db', async function(req, res)
 	}
 });
 
-app.put('/db')
+app.put('/db', async function(req, res)
+{
+	try
+	{
+		res.send(req);
+		// var batchName = req;
+		// var temp = req;
+
+		// var dt = new Date();
+		// var month = dt.getMonth()+1;  
+		// var day = dt.getDate();  
+		// var year = dt.getFullYear();  
+		// var hour = dt.getHours();
+		// var minute = dt.getMinutes();
+		// var second = dt.getSeconds();
+		// var ts = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+
+		// client.query('INSERT INTO BatchData"(sample_time, batch_name, temperature) VALUES($1, $2, $3)', [ts, batchName, temp])
+	}
+	catch (err)
+	{
+		console.log('Error');
+		console.error(err);
+	}
+})
 
 // app.get('/db', async (req, res) => {
 // 	console.log("Getting response");
