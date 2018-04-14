@@ -61,7 +61,7 @@ try {
 } catch (err) {
 	console.log('Error');
 	console.error(err);
-	res.send("Error " + err);
+	// res.send("Error " + err);
 }
 
 app.get('/db', async (req, res) => {
