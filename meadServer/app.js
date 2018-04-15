@@ -47,7 +47,7 @@ app.get('/db', async function(req, res)
 	}
 });
 
-app.put('/db', function(req, res)
+app.post('/db', function(req, res)
 {
 	console.log('Servicing put request');
 	console.log('request head: ');
