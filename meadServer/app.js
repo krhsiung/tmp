@@ -77,20 +77,6 @@ app.put('/db', async function(req, res)
 	}
 })
 
-// app.get('/db', async (req, res) => {
-// 	console.log("Getting response");
-//   try {
-//     const result = await client.query('SELECT * FROM "BatchData"');
-//     res.send("Result from query: " + result);
-//     // res.render('pages/db', result);
-//     client.release();
-//   } catch (err) {
-//   	console.log('Error');
-//     console.error(err);
-//     res.send("Error " + err);
-//   }
-// });
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -111,30 +97,5 @@ app.use(function(err, req, res, next) {
 app.listen(PORT, () => console.log(`App listening on port ${ PORT }`))
 
 client.connect();
-	
-// client.query('SELECT * FROM "BatchData";', (err, res) => {
-//   if (err) throw err;
-//   for (let row of res.rows) {
-//     console.log(JSON.stringify(row));
-//   }
-//   client.end();
-// });
-
-
-// app.put('/data', function(req, res)
-// {
-// 	var dt = new Date();
-// 	var month = dt.getMonth()+1;  
-// 	var day = dt.getDate();  
-// 	var year = dt.getFullYear();  
-// 	var hour = dt.getHours();
-// 	var minute = dt.getMinutes();
-// 	var second = dt.getSeconds();
-// 	var ts = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-
-// 	console.log('Received put request at: ' + ts);
-// 	document.write('Received put request at: ' + ts);
-// 	alert('Received put request at: ' + ts);
-// })
 
 module.exports = app;
