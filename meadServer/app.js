@@ -51,22 +51,8 @@ app.put('/db', function(req, res)
 {
 	try
 	{
-		console.log('request body: ');
-		console.log(req.body);
-		console.log('JSON parsing: ');
-		// var json = JSON.parse("{ 'batch': 'code_test', 'temp': '23.25' }");
-		// var json = JSON.parse(req.body);
-		console.log(req.body.batch);
-		// console.log(JSON.parse(req.body));
-		// console.log(JSON.parse('{"Bees":"yesplease"}'));
-		res.send(req.body.batch);
-		
-		// var batchName = json.batch;
-		// var temp = json.temp;
-		// console.log(batchName);
-		// res.send(batchName);
-		// var batchName = req;
-		// var temp = req;
+		var batchName = req.body.batch;
+		var temp = req.body.temp;
 
 		// var dt = new Date();
 		// var month = dt.getMonth()+1;  
@@ -78,12 +64,13 @@ app.put('/db', function(req, res)
 		// var ts = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
 		// client.query('INSERT INTO BatchData"(sample_time, batch_name, temperature) VALUES($1, $2, $3)', [ts, batchName, temp])
+		res.send("ACK");
 	}
 	catch (err)
 	{
 		console.log('Error');
 		console.error(err);
-		res.send(req.body);
+		res.send(err);
 	}
 })
 
