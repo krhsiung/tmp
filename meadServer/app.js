@@ -54,12 +54,12 @@ app.put('/db', function(req, res)
 		console.log('request body: ');
 		console.log(req.body);
 		console.log('JSON parsing: ');
-		var json = JSON.parse("{ 'batch': 'code_test', 'temp': '23.25' }");
+		// var json = JSON.parse("{ 'batch': 'code_test', 'temp': '23.25' }");
 		// var json = JSON.parse(req.body);
-		console.log(json.batch);
+		console.log(req.body.batch);
 		// console.log(JSON.parse(req.body));
 		// console.log(JSON.parse('{"Bees":"yesplease"}'));
-		res.send(req.body);
+		res.send(req.body.batch);
 		
 		// var batchName = json.batch;
 		// var temp = json.temp;
