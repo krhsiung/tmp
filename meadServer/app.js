@@ -49,17 +49,11 @@ app.get('/db', async function(req, res)
 
 app.put('/db', function(req, res)
 {
-	console.log('Servicing put request');
-	console.log(req);
-	// console.log('request head: ');
-	// console.log(req.head);
-	// console.log('request body: ');
-	// console.log(req.body);
-	res.send(req.body);
 	try
 	{
-		// var json = JSON.parse(req.body);
-		// var batchName = json.batch;
+		var json = JSON.parse(req.body);
+		var batchName = json.batch;
+		res.send(batchName);
 		// var temp = json.temp;
 		// console.log(batchName);
 		// res.send(batchName);
