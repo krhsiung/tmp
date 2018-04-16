@@ -54,7 +54,8 @@ app.put('/db', function(req, res)
 		console.log('request body: ');
 		console.log(req.body);
 		console.log('JSON parsing: ');
-		var json = JSON.parse(req.body);
+		var json = JSON.parse("{ 'batch': 'code_test', 'temp': '23.25' }");
+		// var json = JSON.parse(req.body);
 		console.log(json.batch);
 		// console.log(JSON.parse(req.body));
 		// console.log(JSON.parse('{"Bees":"yesplease"}'));
@@ -82,6 +83,7 @@ app.put('/db', function(req, res)
 	{
 		console.log('Error');
 		console.error(err);
+		res.send(req.body);
 	}
 })
 
