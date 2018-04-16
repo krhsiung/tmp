@@ -50,10 +50,11 @@ app.get('/db', async function(req, res)
 app.put('/db', function(req, res)
 {
 	console.log('Servicing put request');
-	console.log('request head: ');
-	console.log(req.head);
-	console.log('request body: ');
-	console.log(req.body);
+	console.log(req);
+	// console.log('request head: ');
+	// console.log(req.head);
+	// console.log('request body: ');
+	// console.log(req.body);
 	res.send(req.body);
 	try
 	{
