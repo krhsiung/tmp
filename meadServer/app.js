@@ -54,14 +54,14 @@ app.put('/db', function(req, res)
 		var batchName = req.body.batch;
 		var temp = req.body.temp;
 
-		// var dt = new Date();
-		// var month = dt.getMonth()+1;  
-		// var day = dt.getDate();  
-		// var year = dt.getFullYear();  
-		// var hour = dt.getHours();
-		// var minute = dt.getMinutes();
-		// var second = dt.getSeconds();
-		// var ts = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+		var dt = new Date();
+		var month = dt.getMonth()+1;  
+		var day = dt.getDate();  
+		var year = dt.getFullYear();  
+		var hour = dt.getHours();
+		var minute = dt.getMinutes();
+		var second = dt.getSeconds();
+		var ts = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
 		// client.query('INSERT INTO BatchData"(sample_time, batch_name, temperature) VALUES($1, $2, $3)', [ts, batchName, temp])
 		res.send("ACK");
