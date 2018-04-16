@@ -66,12 +66,7 @@ app.put('/db', async function(req, res)
 		client.query('INSERT INTO "BatchData" (sample_time, batch_name, temperature) VALUES($1, $2, $3)', [ts, batchName, temp])
 
 		const result = await client.query('SELECT * from "BatchData";');
-		var response = "";
-		for (let row of result.rows)
-		{
-			response += JSON.stringify(row);
-		}
-		res.send(response);
+		res.send("ACK");
 	}
 	catch (err)
 	{
