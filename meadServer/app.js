@@ -47,7 +47,7 @@ app.get('/db', async function(req, res)
 	}
 });
 
-app.put('/db', function(req, res)
+app.put('/db', async function(req, res)
 {
 	try
 	{
@@ -63,8 +63,15 @@ app.put('/db', function(req, res)
 		var second = dt.getSeconds();
 		var ts = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
-		// client.query('INSERT INTO BatchData"(sample_time, batch_name, temperature) VALUES($1, $2, $3)', [ts, batchName, temp])
-		res.send("ACK");
+		client.query('INSERT INTO "BatchData" (sample_time, batch_name, temperature) VALUES($1, $2, $3)', [ts, batchName, temp])
+
+		const result = await client.query('SELECT * from "BatchData";');
+		var response = "";
+		for (let row of result.rows)
+		{
+			response += JSON.stringify(row);
+		}
+		res.send(response);
 	}
 	catch (err)
 	{
