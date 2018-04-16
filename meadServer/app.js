@@ -35,10 +35,12 @@ app.get('/db', async function(req, res)
 	try
 	{
 		const result = await client.query('SELECT * from "BatchData";');
+		var response = "";
 		for (let row of result.rows)
 		{
-			res.send(JSON.stringify(row));
+			response += JSON.stringify(row);
 		}
+		res.send(response);
 	}
 	catch (err)
 	{
@@ -71,7 +73,6 @@ app.put('/db', async function(req, res)
 	{
 		console.log('Error');
 		console.error(err);
-		res.send(err);
 	}
 })
 
