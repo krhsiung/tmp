@@ -39,6 +39,7 @@ app.get('/db', async function(req, res)
 		for (let row of result.rows)
 		{
 			response += JSON.stringify(row);
+			response += '\n';
 		}
 		res.send(response);
 	}
