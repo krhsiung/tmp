@@ -54,7 +54,7 @@ app.put('/db', function(req, res)
 		console.log('request body: ');
 		console.log(req.body);
 		console.log('JSON parsing: ');
-		console.log(JSON.parse('{"Bees":"yesplease"'));
+		console.log(JSON.parse('{"Bees":"yesplease"}'));
 		res.send(req.body);
 		// var json = JSON.parse(req.body);
 		// var batchName = json.batch;
