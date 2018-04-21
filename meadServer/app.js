@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
-app.get('/api/users', async function(req, res)
+app.get('/', async function(req, res)
 {
 	try
 	{
