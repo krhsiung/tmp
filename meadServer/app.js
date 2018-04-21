@@ -95,11 +95,6 @@ app.get('/', async function(req, res)
 			selectedBatch = "No batches found";
 		}
 
-		ReactDOM.render(
-			<BatchButtons />,
-			document.getElementById('root')
-		);
-
 		res.send(selectedBatch);
 	}
 	catch (err)
@@ -158,3 +153,8 @@ app.listen(PORT, () => console.log(`App listening on port ${ PORT }`))
 client.connect();
 
 module.exports = app;
+
+ReactDOM.render(
+	<BatchButtons />,
+	document.getElementById('root')
+);
