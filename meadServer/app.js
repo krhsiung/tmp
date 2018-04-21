@@ -28,9 +28,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
-app.get('/', (req, res) => res.send('Hello World!'));
+// app.get('/', (req, res) => res.send('Hello World!'));
 
-app.get('/db', async function(req, res)
+app.get('/', async function(req, res)
 {
 	try
 	{
