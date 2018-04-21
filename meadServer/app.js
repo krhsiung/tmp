@@ -1,6 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -36,43 +33,43 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
-class BatchButtons extends React.Component
-{
-	// constructor(props)
-	// {
-	// 	super(props);
-	// 	this.state =
-	// 	{
-	// 		buttons: [
-	// 			{
-	// 				text: '';
-	// 			}
-	// 		],
-	// 	}
-	// }
+// class BatchButtons extends React.Component
+// {
+// 	// constructor(props)
+// 	// {
+// 	// 	super(props);
+// 	// 	this.state =
+// 	// 	{
+// 	// 		buttons: [
+// 	// 			{
+// 	// 				text: '';
+// 	// 			}
+// 	// 		],
+// 	// 	}
+// 	// }
 
-	render()
-	{
-		const buttons = batchNames.map( x =>
-		{
-			const desc = x;
-			return (
-				<li key = {x}>
-					<button onClick={() => clickHandler(x)}>{desc}</button>
-				</li>
-			);
-		});
+// 	render()
+// 	{
+// 		const buttons = batchNames.map( x =>
+// 		{
+// 			const desc = x;
+// 			return (
+// 				<li key = {x}>
+// 					<button onClick={() => clickHandler(x)}>{desc}</button>
+// 				</li>
+// 			);
+// 		});
 
-		render(
-			<div className="user-options">
-				<div className "button-group">
-					<div>{'Choose a set of batch data'}</div>
-					<ol> {buttons} </ol>
-				</div>
-			</div>
-		);
-	}
-}
+// 		render(
+// 			<div className="user-options">
+// 				<div className "button-group">
+// 					<div>{'Choose a set of batch data'}</div>
+// 					<ol> {buttons} </ol>
+// 				</div>
+// 			</div>
+// 		);
+// 	}
+// }
 
 app.get('/', async function(req, res)
 {
