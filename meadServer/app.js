@@ -11,6 +11,7 @@ const client = new Client({
 });
 
 var batchNames = [];
+var selectedBatch;
 
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -41,7 +42,16 @@ app.get('/', async function(req, res)
 		{
 			batchNames.push(row.batch_name);
 		}
-		
+
+		if (batchNames.length > 0)
+		{
+			selectedBatch = batchNames[0];
+		}
+		else
+		{
+			selectedBatch = "No batches found";
+		}
+
 		res.send(batchNames);
 	}
 	catch (err)
