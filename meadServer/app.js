@@ -31,7 +31,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
-app.get('/', async function(req, res)
+app.get('/', function(req,res)
+{
+	res.send('Welcome to Brendan\'s home brewing monitoring back end!');
+})
+
+app.get('/api/users', async function(req, res)
 {
 	try
 	{
