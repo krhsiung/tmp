@@ -59,7 +59,7 @@ app.get('/', async function(req, res)
 			selectedBatch = "No batches found";
 		}
 
-		ReactDOM.render(<h1 />, document.getElementById('root'))
+		ReactDOM.render(element)
 
 		res.send(element);
 	}
