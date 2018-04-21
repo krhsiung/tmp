@@ -36,7 +36,7 @@ app.get('/', async function(req, res)
 		var response = "";
 		for (let row of result.rows)
 		{
-			response += JSON.stringify(row);
+			response += row.batch_name;
 			response += '\n';
 		}
 		res.send(response);
