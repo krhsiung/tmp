@@ -14,7 +14,7 @@ var batchNames = [];
 var selectedBatch;
 
 // var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/users');
 
 var app = express();
 
@@ -29,19 +29,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/users', usersRouter);
 
 app.get('/', function(req,res)
 {
-	// res.send('Welcome to Brendan\'s home brewing monitoring back end!');
-	res.json([{
-  	id: 1,
-  	username: "samsepi0l"
-  }, {
-  	id: 2,
-  	username: "D0loresH4ze"
-  }]);
-});
+	res.send('Welcome to Brendan\'s home brewing monitoring back end!');
+})
 
 app.get('/api/users', async function(req, res)
 {
