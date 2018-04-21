@@ -10,6 +10,8 @@ const client = new Client({
   ssl: true,
 });
 
+var batchNames = [];
+
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 
@@ -32,14 +34,15 @@ app.get('/', async function(req, res)
 {
 	try
 	{
+		batchNames = [];
+
 		const result = await client.query('SELECT batch_name from "BatchData" group by batch_name;');
-		var response = "";
 		for (let row of result.rows)
 		{
-			response += row.batch_name;
-			response += '\n';
+			batchNames.push(row.batch_name);
 		}
-		res.send(response);
+		
+		res.send(batchNames);
 	}
 	catch (err)
 	{
