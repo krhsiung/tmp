@@ -28,13 +28,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
-// app.get('/', (req, res) => res.send('Hello World!'));
-
 app.get('/', async function(req, res)
 {
 	try
 	{
-		const result = await client.query('SELECT * from "BatchData";');
+		const result = await client.query('SELECT batch_name from "BatchData";');
 		var response = "";
 		for (let row of result.rows)
 		{
