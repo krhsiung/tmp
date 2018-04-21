@@ -44,13 +44,13 @@ app.get('/api/users', async function(req, res)
 
 		const result = await client.query('SELECT batch_name from "BatchData";');// group by batch_name;');
 
-		var response = "";
-		for (let row of result.rows)
-		{
-			// batchNames.push(row.batch_name);
-			response += JSON.stringify(row);
-			response += '\n';
-		}
+		// var response = "";
+		// for (let row of result.rows)
+		// {
+		// 	// batchNames.push(row.batch_name);
+		// 	response += JSON.stringify(row);
+		// 	response += '\n';
+		// }
 
 		// if (batchNames.length > 0)
 		// {
@@ -61,7 +61,7 @@ app.get('/api/users', async function(req, res)
 		// 	selectedBatch = "No batches found";
 		// }
 
-		res.json(selectedBatch);
+		res.json(result);
 	}
 	catch (err)
 	{
