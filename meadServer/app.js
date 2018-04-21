@@ -33,8 +33,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function(req,res)
 {
-	res.send('Welcome to Brendan\'s home brewing monitoring back end!');
-})
+	// res.send('Welcome to Brendan\'s home brewing monitoring back end!');
+	res.json([{
+  	id: 1,
+  	username: "samsepi0l"
+  }, {
+  	id: 2,
+  	username: "D0loresH4ze"
+  }]);
+});
 
 app.get('/api/users', async function(req, res)
 {
