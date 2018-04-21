@@ -52,7 +52,7 @@ app.get('/', async function(req, res)
 			selectedBatch = "No batches found";
 		}
 
-		res.send(batchNames);
+		res.send(selectedBatch);
 	}
 	catch (err)
 	{
