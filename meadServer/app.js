@@ -18,7 +18,7 @@ require("babel-core").transform("code", options);
 var batchNames = [];
 var selectedBatch;
 
-// var indexRouter = require('./routes/index');
+var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 
 var app = express();
@@ -33,13 +33,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', indexRouter);
+app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
 app.get('/', async function(req, res)
 {
-	const element = <h1>Hello, world!</h1>;
-
 	try
 	{
 		batchNames = [];
@@ -59,9 +57,8 @@ app.get('/', async function(req, res)
 			selectedBatch = "No batches found";
 		}
 
-		ReactDOM.render(element)
-
-		res.send(element);
+		res.render('index');
+		res.send(selectedBatch);
 	}
 	catch (err)
 	{
