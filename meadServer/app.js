@@ -153,8 +153,3 @@ app.listen(PORT, () => console.log(`App listening on port ${ PORT }`))
 client.connect();
 
 module.exports = app;
-
-ReactDOM.render(
-	<BatchButtons />,
-	document.getElementById('root')
-);
