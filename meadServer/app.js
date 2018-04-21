@@ -18,7 +18,7 @@ require("babel-core").transform("code", options);
 var batchNames = [];
 var selectedBatch;
 
-var indexRouter = require('./routes/index');
+// var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 
 var app = express();
@@ -33,8 +33,46 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 // app.use('/users', usersRouter);
+
+class BatchButtons extends React.Component
+{
+	// constructor(props)
+	// {
+	// 	super(props);
+	// 	this.state =
+	// 	{
+	// 		buttons: [
+	// 			{
+	// 				text: '';
+	// 			}
+	// 		],
+	// 	}
+	// }
+
+	render()
+	{
+		const buttons = batchNames.map( x =>
+		{
+			const desc = x;
+			return (
+				<li key = {x}>
+					<button onClick={() => clickHandler(x)}>{desc}</button>
+				</li>
+			);
+		});
+
+		render(
+			<div className="user-options">
+				<div className "button-group">
+					<div>{'Choose a set of batch data'}</div>
+					<ol> {buttons} </ol>
+				</div>
+			</div>
+		);
+	}
+}
 
 app.get('/', async function(req, res)
 {
@@ -57,7 +95,11 @@ app.get('/', async function(req, res)
 			selectedBatch = "No batches found";
 		}
 
-		res.render('index');
+		ReactDOM.render(
+			<BatchButtons />,
+			document.getElementById('root')
+		);
+
 		res.send(selectedBatch);
 	}
 	catch (err)
