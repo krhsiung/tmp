@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -9,6 +12,8 @@ const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
 });
+
+require("babel-core").transform("code", options);
 
 var batchNames = [];
 var selectedBatch;
@@ -33,6 +38,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', async function(req, res)
 {
+	const element = <h1>Hello, world!</h1>;
+
 	try
 	{
 		batchNames = [];
@@ -52,7 +59,7 @@ app.get('/', async function(req, res)
 			selectedBatch = "No batches found";
 		}
 
-		res.send(selectedBatch);
+		res.send(element);
 	}
 	catch (err)
 	{
