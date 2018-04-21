@@ -32,7 +32,7 @@ app.get('/', async function(req, res)
 {
 	try
 	{
-		const result = await client.query('SELECT batch_name from "BatchData";');
+		const result = await client.query('SELECT batch_name from "BatchData group by batch_name";');
 		var response = "";
 		for (let row of result.rows)
 		{
