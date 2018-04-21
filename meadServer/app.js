@@ -31,28 +31,32 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
-app.get('/', async function(req, res)
+app.get('/api/users', async function(req, res)
 {
 	try
 	{
 		batchNames = [];
 
-		const result = await client.query('SELECT batch_name from "BatchData" group by batch_name;');
+		const result = await client.query('SELECT batch_name from "BatchData";');// group by batch_name;');
+
+		var response = "";
 		for (let row of result.rows)
 		{
-			batchNames.push(row.batch_name);
+			// batchNames.push(row.batch_name);
+			response += JSON.stringify(row);
+			response += '\n';
 		}
 
-		if (batchNames.length > 0)
-		{
-			selectedBatch = batchNames[0];
-		}
-		else
-		{
-			selectedBatch = "No batches found";
-		}
+		// if (batchNames.length > 0)
+		// {
+		// 	selectedBatch = batchNames[0];
+		// }
+		// else
+		// {
+		// 	selectedBatch = "No batches found";
+		// }
 
-		res.send(selectedBatch);
+		res.json(selectedBatch);
 	}
 	catch (err)
 	{
