@@ -69,6 +69,11 @@ app.get('/api/batchData', async function(req, res)
 
 		res.json(response);
 	}
+	catch (err)
+	{
+		console.log('Error');
+		console.error(err);
+	}
 });
 
 app.get('*', (req, res) => {
