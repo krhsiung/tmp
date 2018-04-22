@@ -44,7 +44,7 @@ app.get('/api/data', async function(req, res)
 	{
 		batchNames = [];
 
-		const result = await client.query('SELECT batch_name from "BatchData";');// group by batch_name;');
+		const result = await client.query('SELECT batch_name from "BatchData" group by batch_name;');
 
 		// var response = "";
 		// for (let row of result.rows)
