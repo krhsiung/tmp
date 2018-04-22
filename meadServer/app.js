@@ -64,7 +64,7 @@ app.get('/api/batchData', async function(req, res)
 
 		for (let row of result.rows)
 		{
-			response.push(row);
+			response.push(JSON.stringify(row));
 		}
 
 		res.json(response);
