@@ -38,6 +38,20 @@ app.get('/', function(req,res)
 	res.send('Welcome to Brendan\'s home brewing monitoring back end!');
 })
 
+app.get('/api/passwords', (req, res) => {
+  const count = 5;
+
+  // Generate some passwords
+  const passwords = Array.from(Array(count).keys()).map(i =>
+    "Item" + i;
+  )
+
+  // Return them as json
+  res.json(passwords);
+
+  console.log(`Sent ${count} passwords`);
+});
+
 app.get('/api/data', async function(req, res)
 {
 	try
