@@ -27,6 +27,7 @@ class App extends Component
   render()
   {
     const { batchNames } = this.state.batchNames;
+    const { batchData } = this.state.batchData;
 
     return (
       <div className="App">
@@ -44,7 +45,8 @@ class App extends Component
               be the same number of names, and they never
               change positions in the array.*/
             }
-            {batchNames.map((name, index) =>
+            {
+              batchNames.map((name, index) =>
               <li key={index}>
                 {name}
               </li>
@@ -55,6 +57,15 @@ class App extends Component
               onClick={this.getNames}>
               Get More
             </button>
+
+            <h1>Batch Data</h1>
+            <u1 className="batchData">
+            {
+              batchData.map((data, index) =>
+                <li key = {data.sample_time}>
+                  {data}
+                </li>
+            )}
           </div>
         ) : (
         // Render a helpful message otherwise
