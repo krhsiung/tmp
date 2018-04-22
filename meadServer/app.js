@@ -63,7 +63,7 @@ app.get('/api/data', async function(req, res)
 		// 	selectedBatch = "No batches found";
 		// }
 
-		res.json(result);
+		res.json(result.rows);
 	}
 	catch (err)
 	{
