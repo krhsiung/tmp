@@ -29,26 +29,26 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'meadServer/client/build')));
 
 app.use('/users', usersRouter);
 
-app.get('/', function(req,res)
-{
-	res.send('Welcome to Brendan\'s home brewing monitoring back end!');
-})
+// app.get('/', function(req,res)
+// {
+// 	res.send('Welcome to Brendan\'s home brewing monitoring back end!');
+// })
 
-app.get('/api/passwords', (req, res) => {
-  const count = 5;
+// app.get('/api/passwords', (req, res) => {
+//   const count = 5;
 
-  // Generate some passwords
-  const passwords = Array.from(Array(count).keys()).map(i => {"Item";})
+//   // Generate some passwords
+//   const passwords = Array.from(Array(count).keys()).map(i => {"Item";})
 
-  // Return them as json
-  res.json(passwords);
+//   // Return them as json
+//   res.json(passwords);
 
-  console.log(`Sent ${count} passwords`);
-});
+//   console.log(`Sent ${count} passwords`);
+// });
 
 app.get('/api/data', async function(req, res)
 {
@@ -85,7 +85,7 @@ app.get('/api/data', async function(req, res)
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  res.sendFile(path.join(__dirname+'/meadServer/client/build/index.html'));
 });
 
 
