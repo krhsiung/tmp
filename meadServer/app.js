@@ -55,26 +55,26 @@ app.get('/api/batchNames', async function(req, res)
 	}
 });
 
-app.get('/api/batchData', async function(req, res)
-{
-	try
-	{
-		response = [];
-		const result = await client.query('SELECT sample_time, temperature FROM "BatchData" WHERE batch_name="code_test";');//, ['code_test']);
+// app.get('/api/batchData', async function(req, res)
+// {
+// 	try
+// 	{
+// 		response = [];
+// 		const result = await client.query('SELECT sample_time, temperature FROM "BatchData" WHERE batch_name="code_test";');//, ['code_test']);
 
-		for (let row of result.rows)
-		{
-			response.push(row);
-		}
+// 		for (let row of result.rows)
+// 		{
+// 			response.push(row);
+// 		}
 
-		res.json(response);
-	}
-	catch (err)
-	{
-		console.log('Error');
-		console.error(err);
-	}
-});
+// 		res.json(response);
+// 	}
+// 	catch (err)
+// 	{
+// 		console.log('Error');
+// 		console.error(err);
+// 	}
+// });
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
