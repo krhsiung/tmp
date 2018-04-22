@@ -64,8 +64,8 @@ class App extends Component
               onClick={this.getNames}>
               Get More
             </button>
-          </div>
-          <div>{}
+          </div>,
+          <div>
             <h1>Batch Data</h1>
             <u1 className="batchData">
             {
@@ -75,7 +75,7 @@ class App extends Component
                 </li>
             )}
             </u1>
-              <button
+            <button
               className="get data"
               onClick={this.getData}>
               Get Data
@@ -90,8 +90,8 @@ class App extends Component
               onClick={this.getNames}>
               Try Again?
             </button>
-          </div>
-          <div>{}
+          </div>,
+          <div>
             <h1>Data?</h1>
             <button
               className="get data"
