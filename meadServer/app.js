@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
-app.use(express.static(path.join(__dirname, 'meadServer/client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use('/users', usersRouter);
 
@@ -85,7 +85,7 @@ app.get('/api/data', async function(req, res)
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/meadServer/client/build/index.html'));
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 
