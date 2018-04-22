@@ -44,7 +44,7 @@ class App extends Component
       {
         batchNames.length ? (
           <div>
-            <h1>Batch Data</h1>
+            <h1>Batch Names.</h1>
             <ul className="batchNames">
             {/*
               Generally it's bad to use "index" as a key.
@@ -52,7 +52,7 @@ class App extends Component
               be the same number of names, and they never
               change positions in the array.*/
             }
-            {batchData.map((name, index) =>
+            {batchNames.map((name, index) =>
               <li key={index}>
                 {name}
               </li>
@@ -70,7 +70,7 @@ class App extends Component
             <h1>No names :(</h1>
             <button
               className="more"
-              onClick={this.getData}>
+              onClick={this.getNames}>
               Try Again?
             </button>
           </div>
