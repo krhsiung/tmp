@@ -33,7 +33,6 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.use('/users', usersRouter);
 
-
 app.get('/api/batchNames', async function(req, res)
 {
 	try
@@ -42,7 +41,6 @@ app.get('/api/batchNames', async function(req, res)
 
 		const result = await client.query('SELECT batch_name from "BatchData" group by batch_name;');
 
-		var response = "";
 		for (let row of result.rows)
 		{
 			batchNames.push(row.batch_name);
@@ -54,6 +52,22 @@ app.get('/api/batchNames', async function(req, res)
 	{
 		console.log('Error');
 		console.error(err);
+	}
+});
+
+app.get('/api/batchData', async function(req, res)
+{
+	try
+	{
+		response = [];
+		const result = await client.query('SELECT sample_time, temperature FROM "BatchData" WHERE batch_name=$1', [req.batchName]);
+
+		for (let row of result.rows)
+		{
+			response.push(row);
+		}
+
+		res.json(response);
 	}
 });
 
@@ -78,7 +92,7 @@ app.put('/db', async function(req, res)
 		var second = dt.getSeconds();
 		var ts = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
-		client.query('INSERT INTO "BatchData" (sample_time, batch_name, temperature) VALUES($1, $2, $3)', [ts, batchName, temp])
+		client.query('INSERT INTO "BatchData" (sample_time, batch_name, temperature) VALUES($1, $2, $3)', [ts, batchName, temp]);
 
 		res.send("ACK");
 	}

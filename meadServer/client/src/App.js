@@ -3,7 +3,7 @@ import './App.css';
 
 class App extends Component {
   // Initialize state
-  state = { batchNames: [] }
+  state ={ batchNames: [] }
 
   // Fetch names after first mount
   componentDidMount() {
