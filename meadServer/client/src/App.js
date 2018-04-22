@@ -24,17 +24,9 @@ class App extends Component
       .then(batchNames => this.setState({ batchNames }));
   }
 
-  getData = () =>
-  {
-    fetch('/api/batchData')
-    .then(res => res.json)
-    .then(batchData => this.setState({ batchData }));
-  }
-
   render()
   {
-    const { batchNames } = this.state.batchNames;
-    const { batchData } = this.state.batchData;
+    const { batchNames } = this.state;
 
     return (
       <div className="App">
