@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const generatePassword = require('password-generator');
 const PORT = process.env.PORT || 5000
 const { Client } = require('pg');
 const client = new Client({
@@ -42,7 +43,9 @@ app.get('/api/passwords', (req, res) => {
   const count = 5;
 
   // Generate some passwords
-  const passwords = Array.from(Array(count).keys()).map(i => {"Item" + i;})
+  const passwords = Array.from(Array(count).keys()).map(i =>
+    generatePassword(12, false)
+  )
 
   // Return them as json
   res.json(passwords);
