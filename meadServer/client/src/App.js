@@ -24,9 +24,17 @@ class App extends Component
       .then(batchNames => this.setState({ batchNames }));
   }
 
+  getData = () =>
+  {
+    fetch('/api/batchData')
+    .then(res => res.json)
+    .then(batchData => this.setState({ batchData }));
+  }
+
   render()
   {
-    const { batchNames } = this.state;
+    const { batchNames } = this.state.batchNames;
+    const { batchData } = this.state.batchData;
 
     return (
       <div className="App">
@@ -36,7 +44,7 @@ class App extends Component
       {
         batchNames.length ? (
           <div>
-            <h1>Batch Names.</h1>
+            <h1>Batch Data</h1>
             <ul className="batchNames">
             {/*
               Generally it's bad to use "index" as a key.
@@ -44,7 +52,7 @@ class App extends Component
               be the same number of names, and they never
               change positions in the array.*/
             }
-            {batchNames.map((name, index) =>
+            {batchData.map((name, index) =>
               <li key={index}>
                 {name}
               </li>
@@ -62,7 +70,7 @@ class App extends Component
             <h1>No names :(</h1>
             <button
               className="more"
-              onClick={this.getNames}>
+              onClick={this.getData}>
               Try Again?
             </button>
           </div>
