@@ -24,17 +24,9 @@ class App extends Component
       .then(batchNames => this.setState({ batchNames }));
   }
 
-  // getData = () =>
-  // {
-  //   fetch('/api/batchData')
-  //     .then(res => res.json())
-  //     .then(batchData => this.setState({ batchData }))
-  // }
-
   render()
   {
     const { batchNames } = this.state.batchNames;
-    // const { batchData } = this.state.batchData;
 
     return (
       <div className="App">
@@ -52,8 +44,7 @@ class App extends Component
               be the same number of names, and they never
               change positions in the array.*/
             }
-            {
-              batchNames.map((name, index) =>
+            {batchNames.map((name, index) =>
               <li key={index}>
                 {name}
               </li>
