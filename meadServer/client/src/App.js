@@ -64,16 +64,22 @@ class App extends Component
               onClick={this.getNames}>
               Get More
             </button>
-
-            <h2>Batch Data</h2>
-            <u2 className="batchData">
+          </div>
+          <div>
+            <h1>Batch Data</h1>
+            <u1 className="batchData">
             {
               batchData.map((data, index) =>
                 <li key = {data.sample_time}>
                   {data}
                 </li>
             )}
-            </u2>
+            </u1>
+              <button
+              className="get data"
+              onClick={this.getData}>
+              Get Data
+            </button>
           </div>
         ) : (
         // Render a helpful message otherwise
@@ -83,6 +89,14 @@ class App extends Component
               className="more"
               onClick={this.getNames}>
               Try Again?
+            </button>
+          </div>
+          <div>
+            <h1>Data?</h1>
+            <button
+              className="get data"
+              onClick={this.getData}>
+              Get Data
             </button>
           </div>
         )}
