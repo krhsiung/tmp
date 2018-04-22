@@ -65,7 +65,7 @@ class App extends Component
               Get More
             </button>
           </div>
-          <div>
+          <div>{}
             <h1>Batch Data</h1>
             <u1 className="batchData">
             {
@@ -91,7 +91,7 @@ class App extends Component
               Try Again?
             </button>
           </div>
-          <div>
+          <div>{}
             <h1>Data?</h1>
             <button
               className="get data"
