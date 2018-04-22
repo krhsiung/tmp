@@ -26,7 +26,7 @@ class App extends Component
 
   render()
   {
-    const { batchNames } = this.state.batchNames;
+    const { batchNames } = this.state;
 
     return (
       <div className="App">
