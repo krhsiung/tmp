@@ -42,7 +42,7 @@ app.get('/api/passwords', (req, res) => {
   const count = 5;
 
   // Generate some passwords
-  const passwords = Array.from(Array(count).keys()).map(i => ("Item" + i);)
+  const passwords = Array.from(Array(count).keys()).map(i => {"Item";})
 
   // Return them as json
   res.json(passwords);
