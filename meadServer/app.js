@@ -60,7 +60,7 @@ app.get('/api/batchData', async function(req, res)
 	try
 	{
 		response = [];
-		const result = await client.query('SELECT sample_time, temperature FROM "BatchData" WHERE batch_name=$1;', [req.batchName]);
+		const result = await client.query('SELECT sample_time, temperature FROM "BatchData";');// WHERE batch_name=$1;', [req.batchName]);
 
 		for (let row of result.rows)
 		{
