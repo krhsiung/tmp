@@ -4,7 +4,7 @@
   "description": "Online access for homebrewing of mead fermentation data",
   "main": "index.js",
   "scripts": {
-    "test": "mead"
+    "test": "mead",
     "heroku-postbuild": "cd meadServer/client && npm install --only=dev && npm install && npm run build"
   },
   "repository": {
