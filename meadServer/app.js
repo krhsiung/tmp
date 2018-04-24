@@ -6,7 +6,7 @@ var logger = require('morgan');
 const PORT = process.env.PORT || 5000
 const { Client } = require('pg');
 
-Heroku DB
+// Heroku DB
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: true,
