@@ -24,9 +24,17 @@ class App extends Component
       .then(batchNames => this.setState({ batchNames }));
   }
 
+  getData = () =>
+  {
+    fetch('/api/batchData')
+      .then(res => res.json())
+      .then(batchData => this.setState({ batchData }));
+  }
+
   render()
   {
     const { batchNames } = this.state;
+    const { batchData } = this.state;
 
     return (
       <div className="App">
@@ -36,7 +44,7 @@ class App extends Component
       {
         batchNames.length ? (
           <div>
-            <h1>Batch Names.</h1>
+            <h1>Batch Names</h1>
             <ul className="batchNames">
             {/*
               Generally it's bad to use "index" as a key.
@@ -55,6 +63,19 @@ class App extends Component
               onClick={this.getNames}>
               Get More
             </button>
+            <h1> Batch Data</h1>
+            <u1 className="batchData">
+            {batchData.map((name, index) =>
+              <li key={index}>
+                {name.sample_time + "\t:\t" + name.temperature + "F"}
+              </li>
+            )}
+            </u1>
+            <button
+              className="dataGrab"
+              onClick={this.getData}>
+              Get Data
+            </button>
           </div>
         ) : (
         // Render a helpful message otherwise
@@ -64,6 +85,12 @@ class App extends Component
               className="more"
               onClick={this.getNames}>
               Try Again?
+            </button>
+            <h1>No data :(</h1>
+            <button
+              className="dataGrab"
+              onClick={this.getData}>
+              Get Data?
             </button>
           </div>
         )}
