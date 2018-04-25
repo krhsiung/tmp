@@ -7,7 +7,8 @@ class App extends Component
   state =
   {
     batchNames: [],
-    batchData: []
+    batchData: [],
+    selected: ''
   }
 
   // Fetch names after first mount
@@ -26,9 +27,12 @@ class App extends Component
 
   getData = () =>
   {
-    fetch('/api/batchData')
-      .then(res => res.json())
-      .then(batchData => this.setState({ batchData }));
+    if (this.selected !== '')
+    {
+      fetch('/api/batchData/' + this.selected)
+        .then(res => res.json())
+        .then(batchData => this.setState({ batchData }));
+    }
   }
 
   render()
@@ -39,30 +43,25 @@ class App extends Component
     return (
       <div className="App">
       {
-        /* Render the names if we have them */
-      }
-      {
         batchNames.length ? (
           <div>
             <h1>Batch Names</h1>
             <ul className="batchNames">
-            {/*
-              Generally it's bad to use "index" as a key.
-              It's ok for this example because there will always
-              be the same number of names, and they never
-              change positions in the array.*/
-            }
             {batchNames.map((name, index) =>
               <li key={index}>
-                {name}
+                <button
+                  onClick=
+                  {() =>
+                    {
+                      this.selected = name;
+                      this.getData();
+                    }
+                  }>
+                  {name}
+                </button>
               </li>
             )}
             </ul>
-            <button
-              className="more"
-              onClick={this.getNames}>
-              Get More
-            </button>
             <h1> Batch Data</h1>
             <u1 className="batchData">
             {batchData.map((name, index) =>
@@ -71,27 +70,11 @@ class App extends Component
               </li>
             )}
             </u1>
-            <button
-              className="dataGrab"
-              onClick={this.getData}>
-              Get Data
-            </button>
           </div>
         ) : (
-        // Render a helpful message otherwise
           <div>
             <h1>No names :(</h1>
-            <button
-              className="more"
-              onClick={this.getNames}>
-              Try Again?
-            </button>
             <h1>No data :(</h1>
-            <button
-              className="dataGrab"
-              onClick={this.getData}>
-              Get Data?
-            </button>
           </div>
         )}
       </div>
