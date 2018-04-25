@@ -76,7 +76,7 @@ app.get('/api/batchData/:name', async function(req, res)
 		response = [];
 
 		//Heroku DB
-		const result = await client.query('SELECT sample_time, temperature FROM "BatchData" WHERE batch_name=\'code_test\';');//, ['code_test']);
+		const result = await client.query('SELECT sample_time, temperature FROM "BatchData" WHERE batch_name=$1);', [req.params.name]);
 
 		//Local DB
 		// const result = await client.query('SELECT sample_time, temperature FROM "FermentationData"."BatchData" WHERE batch_name=$1;', [req.params.name]);
