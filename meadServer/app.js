@@ -73,7 +73,6 @@ app.get('/api/batchData/:name', async function(req, res)
 {
 	try
 	{
-		console.log(req.params);
 		response = [];
 
 		//Heroku DB
