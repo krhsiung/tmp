@@ -22,7 +22,6 @@ const client = new Client({
 // })
 
 var batchNames = [];
-var selectedBatch;
 
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -48,10 +47,7 @@ app.get('/api/batchNames', async function(req, res)
 {
 	try
 	{
-		console.log("Trying to get batch names");
 		batchNames = [];
-
-		console.log("querying postgres");
 
 		//Heroku DB
 		const result = await client.query('SELECT batch_name from "BatchData" group by batch_name;');
@@ -59,11 +55,8 @@ app.get('/api/batchNames', async function(req, res)
 		//Local DB
 		// const result = await client.query('SELECT batch_name from "FermentationData"."BatchData" group by batch_name;');
 
-		console.log("Got Result: " + result);
-
 		for (let row of result.rows)
 		{
-			console.log(row);
 			batchNames.push(row.batch_name);
 		}
 
@@ -76,24 +69,23 @@ app.get('/api/batchNames', async function(req, res)
 	}
 });
 
-app.get('/api/batchData', async function(req, res)
+app.get('/api/batchData/:name', async function(req, res)
 {
 	try
 	{
+		console.log(req.params);
 		response = [];
 
 		//Heroku DB
 		const result = await client.query('SELECT sample_time, temperature FROM "BatchData" WHERE batch_name=\'code_test\';');//, ['code_test']);
 
 		//Local DB
-		// const result = await client.query('SELECT sample_time, temperature FROM "FermentationData"."BatchData" WHERE batch_name=\'code_test\';');//, ['code_test']);
+		// const result = await client.query('SELECT sample_time, temperature FROM "FermentationData"."BatchData" WHERE batch_name=$1;', [req.params.name]);
 
 		for (let row of result.rows)
 		{
 			response.push(row);
 		}
-
-		console.log(response);
 
 		res.json(response);
 	}
