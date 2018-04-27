@@ -21,8 +21,6 @@ const client = new Client({
 //   port: 5433,
 // })
 
-var batchNames = [];
-
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 
@@ -47,7 +45,7 @@ app.get('/api/batchNames', async function(req, res)
 {
 	try
 	{
-		batchNames = [];
+		var batchNames = [];
 
 		//Heroku DB
 		const result = await client.query('SELECT batch_name from "BatchData" group by batch_name;');
@@ -73,7 +71,7 @@ app.get('/api/batchData/:name', async function(req, res)
 {
 	try
 	{
-		response = [];
+		var response = [];
 
 		//Heroku DB
 		const result = await client.query('SELECT sample_time, temperature FROM "BatchData" WHERE batch_name=$1;', [req.params.name]);
@@ -83,8 +81,10 @@ app.get('/api/batchData/:name', async function(req, res)
 
 		for (let row of result.rows)
 		{
-			response.push(row);
+			response.push({x: row.sample_time, y: row.temperature});
 		}
+
+		console.log(response);
 
 		res.json(response);
 	}
