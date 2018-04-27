@@ -70,6 +70,7 @@ class App extends Component
             axes
             grid
             verticalGrid
+            yDomainRange={[30, 110]}
             axisLabels={{x: 'Time', y: 'Temperature (F)'}}
             height={400}
             width={600}
