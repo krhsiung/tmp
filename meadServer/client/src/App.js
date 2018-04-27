@@ -66,7 +66,8 @@ class App extends Component
             data={[
               batchData
             ]}
-            xType={'text'}
+            datePattern={'%Y-%m-%d-%H:%M'}
+            xType={'time'}
             xTicks={5}
             axes
             grid

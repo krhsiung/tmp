@@ -74,17 +74,46 @@ app.get('/api/batchData/:name', async function(req, res)
 		var response = [];
 
 		//Heroku DB
-		const result = await client.query('SELECT sample_time, temperature FROM "BatchData" WHERE batch_name=$1;', [req.params.name]);
+		const result = await client.query('SELECT sample_time, temperature FROM "BatchData" WHERE batch_name=$1 ORDER BY sample_time;', [req.params.name]);
 
 		//Local DB
-		// const result = await client.query('SELECT sample_time, temperature FROM "FermentationData"."BatchData" WHERE batch_name=$1;', [req.params.name]);
+		// const result = await client.query('SELECT sample_time, temperature FROM "FermentationData"."BatchData" WHERE batch_name=$1 ORDER BY sample_time;', [req.params.name]);
 
 		for (let row of result.rows)
 		{
-			response.push({x: row.sample_time, y: row.temperature});
-		}
+			var year = row.sample_time.getFullYear();
+			var month = row.sample_time.getMonth();
+			var day = row.sample_time.getDate();
+			var hour = row.sample_time.getHours();
+			var minute = row.sample_time.getMinutes();
 
-		console.log(response);
+			var date = year + '-';
+			if (month < 10)
+			{
+				date += '0';
+			}
+			date += month + '-'
+
+			if (day < 10)
+			{
+				date += '0';
+			}
+			date += day + '-';
+
+			if (hour < 10)
+			{
+				date += '0';
+			}
+			date += hour + ':';
+
+			if (minute < 10)
+			{
+				date += '0';
+			}
+			date += minute;
+
+			response.push({x: date, y: row.temperature});
+		}
 
 		res.json(response);
 	}
