@@ -67,6 +67,7 @@ class App extends Component
               batchData
             ]}
             xType={'text'}
+            xTicks={5}
             axes
             grid
             verticalGrid
