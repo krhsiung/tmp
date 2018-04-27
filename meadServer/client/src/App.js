@@ -68,14 +68,14 @@ class App extends Component
             ]}
             datePattern={'%Y-%m-%d-%H:%M'}
             xType={'time'}
-            xTicks={5}
+            xTicks={20}
             axes
             grid
             verticalGrid
             yDomainRange={[50, 90]}
             axisLabels={{x: 'Time', y: 'Temperature (F)'}}
-            height={400}
-            width={600}
+            height={800}
+            width={1200}
           />
         </div>
       }
