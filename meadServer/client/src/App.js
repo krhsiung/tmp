@@ -4,7 +4,6 @@ import Select from 'react-select';
 import './App.css';
 import 'react-select/dist/react-select.css';
 
-
 class App extends Component
 {
   state =
@@ -30,7 +29,6 @@ class App extends Component
 
   getData = () =>
   {
-    console.log("Selected for data: " + this.selected);
     if (this.selected !== '')
     {
       fetch('/api/batchData/' + this.selected)
@@ -39,11 +37,48 @@ class App extends Component
     }
   }
 
+  printCSV = () =>
+  {
+    if (this.selected !== '')
+    {
+      const Json2csvParser = require('json2csv').Parser;
+      const { batchData } = this.state;
+
+      var csvData = [];
+      for (var i = 0; i < batchData.length; i++)
+      {
+        csvData.push({'Sample Time': batchData[i].x, 'temperature (F)': batchData[i].y});
+      }
+       
+      try
+      {
+        const parser = new Json2csvParser(csvData);
+        const csv = parser.parse(csvData);
+
+        let csvContent = "data:text/csv;charset=utf-8,";
+        csvContent += csv;
+
+        var encodedUri = encodeURI(csvContent);
+        // window.open(encodedUri);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", this.selected + ".csv");
+        link.innerHTML= "Click Here to download";
+        document.body.appendChild(link); // Required for FF
+
+        link.click(); // This will download the data file named "my_data.csv".
+      }
+      catch (err)
+      {
+        console.error(err);
+      }
+    }
+  }
+
 
   // updateSelected(newSelection)
   updateSelected = (newSelection) =>
   {
-    console.log("New selection: " + newSelection);
     this.selected = newSelection;
     this.setState({ selected: newSelection });
     this.getData();
@@ -91,6 +126,14 @@ class App extends Component
             searchable={true}
             rtl={false}
           />
+
+          <br></br>
+          <button
+            className = "CSV-button"
+            onClick={this.printCSV}
+          >
+            {'Export to CSV'}
+          </button>
 
           <LineChart
             data={[
