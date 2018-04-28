@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {LineChart} from 'react-easy-chart';
+import Select from 'react-select';
 import './App.css';
+import 'react-select/dist/react-select.css';
+
 
 class App extends Component
 {
@@ -27,6 +30,7 @@ class App extends Component
 
   getData = () =>
   {
+    console.log("Selected for data: " + this.selected);
     if (this.selected !== '')
     {
       fetch('/api/batchData/' + this.selected)
@@ -35,33 +39,59 @@ class App extends Component
     }
   }
 
+
+  // updateSelected(newSelection)
+  updateSelected = (newSelection) =>
+  {
+    console.log("New selection: " + newSelection);
+    this.selected = newSelection;
+    this.setState({ selected: newSelection });
+    this.getData();
+  }
+
   render()
   {
-    const { batchNames } = this.state;
     const { batchData } = this.state;
+    const { selected } = this.state;
+
+    var batchNamesJSON = [];
+    var i = 0;
+    for (let name of this.state.batchNames)
+    {
+      batchNamesJSON.push({value: i, label: name});
+      i++;
+    }
 
     return (
       <div className="App">
       {
         <div>
-          <h1>Batch Names</h1>
-          <ul className="batchNames">
-          {batchNames.map((name, index) =>
-            <li key={index}>
-              <button
-                onClick=
-                {() =>
-                  {
-                    this.selected = name;
-                    this.getData();
-                  }
-                }>
-                {name}
-              </button>
-            </li>
-          )}
-          </ul>
-          <h1> Batch Data</h1>
+          <h1>Mead Fermentation Temperature Monitoring</h1>
+          <Select
+            id="batch-select"
+            ref={(ref) => { this.select = ref; }}
+            onBlurResetsInput={false}
+            onSelectResetsInput={false}
+            autoFocus
+            options={ batchNamesJSON }
+            simpleValue
+            clearable={false}
+            name="selected-batch"
+            disabled={false}
+            value={{label: selected}}
+            onChange=
+            {(val) =>
+              {
+                if (val !== null)
+                {
+                  this.updateSelected(batchNamesJSON[val].label);
+                }
+              }
+            }
+            searchable={true}
+            rtl={false}
+          />
+
           <LineChart
             data={[
               batchData
