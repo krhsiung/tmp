@@ -24,7 +24,16 @@ class App extends Component
     // Get the names and store them in state
     fetch('/api/batchNames')
       .then(res => res.json())
-      .then(batchNames => this.setState({ batchNames }));
+      .then(batchNames =>
+      {
+        this.setState({ batchNames: batchNames });
+        if (batchNames.length > 0)
+        {
+          this.setState({ selected: batchNames[0]});
+          this.selected = batchNames[0];
+          this.getData();
+        }
+      });
   }
 
   getData = () =>
