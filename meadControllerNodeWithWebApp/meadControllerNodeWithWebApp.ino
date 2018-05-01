@@ -1,3 +1,4 @@
+
 #include "Adafruit_MCP9808.h"
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
@@ -66,19 +67,19 @@ void loop()
   if (writeCounter == 60)
   {
     writeCounter = 0;
-    
+
     if (WiFiMulti.run() == WL_CONNECTED)
-    {  
-      HTTPClient http;   
+    {
+      HTTPClient http;
       http.begin(host, fingerprint);
-      
+
       http.addHeader("Content-Type", "application/json");  //Specify content-type header
       int httpCode = http.PUT(serializedJSON);
-    
+
       http.end();
     }
   }
-  
+
   switch (fridgeState)
   {
     case on:
@@ -111,4 +112,3 @@ void loop()
 
   delay(5000);
 }
-
