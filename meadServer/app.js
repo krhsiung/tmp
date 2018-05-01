@@ -1,3 +1,4 @@
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -137,9 +138,9 @@ app.put('/db', async function(req, res)
 		var temp = req.body.temp;
 
 		var dt = new Date();
-		var month = dt.getMonth()+1;  
-		var day = dt.getDate();  
-		var year = dt.getFullYear();  
+		var month = dt.getMonth()+1;
+		var day = dt.getDate();
+		var year = dt.getFullYear();
 		var hour = dt.getHours();
 		var minute = dt.getMinutes();
 		var second = dt.getSeconds();

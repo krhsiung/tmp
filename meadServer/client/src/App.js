@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import {LineChart} from 'react-easy-chart';
 import Select from 'react-select';
@@ -58,7 +59,7 @@ class App extends Component
       {
         csvData.push({'Sample Time': batchData[i].x, 'temperature (F)': batchData[i].y});
       }
-       
+
       try
       {
         const parser = new Json2csvParser(csvData);
